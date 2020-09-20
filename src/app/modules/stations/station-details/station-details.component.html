@@ -1,0 +1,11 @@
+<div class="d-flex text-light align-items-center bg-dark pl-2">
+  <a [routerLink]="['/stations']">
+    <img src="assets/icons/left-arrow.png" />
+  </a>
+</div>
+<div #map id="map" class="flex-grow-1"></div>
+<jd-view-loader class="bg-white" [state]="state">
+  <ng-container *ngIf="state.isSuccess">
+    <jd-station-tile class="p-3 mb-5" [station]="station"></jd-station-tile>
+  </ng-container>
+</jd-view-loader>
