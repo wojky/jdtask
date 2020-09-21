@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ComponentBaseState } from '../../base/component-base-state';
 
 @Component({
@@ -19,10 +19,6 @@ import { ComponentBaseState } from '../../base/component-base-state';
     </ng-container>
   `,
 })
-export class ViewLoaderComponent<T> implements OnInit {
+export class ViewLoaderComponent<T> {
   @Input() state: ComponentBaseState<T> = new ComponentBaseState();
-  constructor() { }
-
-  ngOnInit(): void { }
-
 }
