@@ -1,6 +1,9 @@
 {
-  "name": "jdtest",
-  "version": "0.0.0",
+  "name": "jdtask",
+  "version": "0.0.1",
+  "repository": {
+    "url": "https://github.com/jsdeveloperpl/jdtask"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
