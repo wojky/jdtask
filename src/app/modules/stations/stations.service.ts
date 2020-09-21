@@ -32,7 +32,7 @@ interface GetStationHttpResponse {
 
 @Injectable({ providedIn: 'root' })
 export class StationsService {
-    private readonly API_URL = 'http://www.poznan.pl/mim/plan/map_service.html?mtype=pub_transport&co=stacje_rowerowe'
+    private readonly URL = 'http://www.poznan.pl/mim/plan/map_service.html?mtype=pub_transport&co=stacje_rowerowe'
     private cache: Array<BikeStation> = []
 
     constructor(private readonly _http: HttpClient) { }
@@ -40,7 +40,7 @@ export class StationsService {
     public getStations$(): Observable<Array<BikeStation>> {
         return this.cache.length
             ? of(this.cache)
-            : this._http.get<GetStationHttpResponse>(this.API_URL)
+            : this._http.get<GetStationHttpResponse>(this.URL)
                 .pipe(
                     map((response: GetStationHttpResponse) => response.features.map(this.parseBikeStationProps)),
                     tap(bikeStations => this.cache = bikeStations)
@@ -50,6 +50,7 @@ export class StationsService {
     private parseBikeStationProps(station: BikeStationApiModel): BikeStation {
         const { properties } = station;
         const [lng, lat] = station.geometry.coordinates;
+
         return {
             ...station,
             geometry: {

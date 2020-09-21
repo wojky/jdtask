@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { ComponentBaseState } from '../../shared/base/component-base-state';
+import { ComponentBaseState } from 'src/app/shared/base/component-base-state';
 import { BikeStation, StationsService } from '../stations.service';
 
 @Component({
@@ -22,13 +22,10 @@ export class StationDetailsComponent implements OnInit {
   private bikeStationDiv!: HTMLDivElement;
   private counterDiv!: HTMLDivElement;
 
-  @ViewChild('map') map!: ElementRef;
-
   constructor(
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
     private readonly _stationsService: StationsService,
-    private readonly _elRef: ElementRef,
   ) { }
 
   ngOnInit(): void {
@@ -69,8 +66,7 @@ export class StationDetailsComponent implements OnInit {
     bikeSymbol.draw = () => {
       if (!this.bikeStationDiv) {
         this.bikeStationDiv = document.createElement('div');
-        this.bikeStationDiv.className = 'marker';
-        this.bikeStationDiv.style.cssText = `width: 35px; height: 35px; text-align: center; line-height: 35px; position: absolute; cursor: pointer; border-radius: 50%; color: #fff; background: #fff`;
+        this.bikeStationDiv.style.cssText = `width: 35px; height: 35px; text-align: center; line-height: 35px; position: absolute; border-radius: 50%; background: #fff`;
         this.bikeStationDiv.innerHTML = `<img src="assets/icons/bike.png">`;
         const panes = bikeSymbol.getPanes();
         panes.overlayLayer.appendChild(this.bikeStationDiv);
@@ -87,9 +83,9 @@ export class StationDetailsComponent implements OnInit {
         const panes = counterSymbol.getPanes();
         panes.overlayLayer.appendChild(this.counterDiv);
       }
+
       const point = counterSymbol.getProjection().fromLatLngToDivPixel(bikeStationCoords);
-      console.log(point);
-      console.log(this.counterDiv.style.left)
+
       if (point) {
         this.counterDiv.style.left = (point.x + 40) + 'px';
         this.counterDiv.style.top = (point.y + 5) + 'px';

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { BikeStation } from '../stations.service';
 
@@ -9,20 +9,15 @@ import { BikeStation } from '../stations.service';
       *ngFor="let station of stations" 
       class="bg-white shadow p-3 rounded-2 my-2 pointer" 
       [station]="station"
-      (click)="openStation(station)"></jd-station-tile>
+      (click)="openStationDetails(station.id)"></jd-station-tile>
   `,
   styleUrls: ['./station-list.component.scss']
 })
-export class StationListComponent implements OnInit {
+export class StationListComponent {
   @Input() stations!: Array<BikeStation>;
   constructor(private readonly _router: Router) { }
 
-  ngOnInit(): void {
-    console.log('init');
-    console.log(this.stations);
-  }
-
-  public openStation(station: BikeStation): void {
-    this._router.navigate(['stations', station.id]);
+  public openStationDetails(id: string): void {
+    this._router.navigate(['stations', id]);
   }
 }
