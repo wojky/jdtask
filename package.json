@@ -2,7 +2,7 @@
   "name": "jdtask",
   "version": "0.0.1",
   "repository": {
-    "url": "https://github.com/jsdeveloperpl/jdtask"
+    "url": "https://github.com/wojky/jdtask.git"
   },
   "scripts": {
     "ng": "ng",
