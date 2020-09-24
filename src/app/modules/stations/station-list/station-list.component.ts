@@ -5,11 +5,13 @@ import { BikeStation } from '../stations.service';
 @Component({
   selector: 'jd-station-list',
   template: `
-    <jd-station-tile 
-      *ngFor="let station of stations" 
-      class="bg-white shadow p-3 rounded-2 my-2 pointer" 
-      [station]="station"
-      (click)="openStationDetails(station.id)"></jd-station-tile>
+  <virtual-scroller #scroll [items]="stations">
+    <jd-station-tile
+      *ngFor="let item of scroll.viewPortItems"
+      class="bg-white shadow p-3 rounded-2 my-2 pointer"
+      [station]="item"
+      (click)="openStationDetails(item.id)"></jd-station-tile>
+  </virtual-scroller>
   `,
   styleUrls: ['./station-list.component.scss']
 })

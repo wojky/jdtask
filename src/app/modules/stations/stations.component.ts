@@ -24,7 +24,6 @@ export class StationsComponent implements OnInit {
   public ngOnInit(): void {
     this.getStations$().subscribe(stations => {
       this.stations = stations;
-      console.log(this.stations)
       this.state.setSuccess();
     });;
   }

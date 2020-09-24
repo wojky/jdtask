@@ -15,7 +15,9 @@ export interface BikeStation {
     id: string;
     type: string;
     geometry: { type: string; coordinates: google.maps.LatLng };
-    properties: BikeStationProps
+    properties: BikeStationProps,
+    distance: number | null;
+    address: string;
 }
 
 export interface BikeStationApiModel {
@@ -62,7 +64,9 @@ export class StationsService {
                 bike_racks: +properties.bike_racks,
                 bikes: +properties.bikes,
                 free_racks: +properties.free_racks,
-            }
+            },
+            distance: null,
+            address: ''
         }
     }
 }

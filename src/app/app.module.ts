@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,6 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    VirtualScrollerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

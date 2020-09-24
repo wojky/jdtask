@@ -38,7 +38,6 @@ export class StationDetailsComponent implements OnInit {
         )
       )
       .subscribe(station => {
-        console.log('details', this._route, station);
         this.station = station;
         this.state.setSuccess();
         this.initMap();
@@ -54,12 +53,16 @@ export class StationDetailsComponent implements OnInit {
     const bikeStationCoords = this.station.geometry.coordinates;
     const map = new google.maps.Map(document.getElementById('map') as HTMLDivElement, {
       zoom: 17,
-      center: bikeStationCoords,
+      center: this.station.geometry.coordinates,
       disableDefaultUI: true,
       gestureHandling: 'none',
       zoomControl: false
     });
 
+    this.addSymbolsToMap(map);
+  }
+
+  private addSymbolsToMap(map: google.maps.Map<HTMLDivElement>) {
     const bikeSymbol = new google.maps.OverlayView();
     const counterSymbol = new google.maps.OverlayView();
 
@@ -84,7 +87,7 @@ export class StationDetailsComponent implements OnInit {
         panes.overlayLayer.appendChild(this.counterDiv);
       }
 
-      const point = counterSymbol.getProjection().fromLatLngToDivPixel(bikeStationCoords);
+      const point = counterSymbol.getProjection().fromLatLngToDivPixel(this.station.geometry.coordinates);
 
       if (point) {
         this.counterDiv.style.left = (point.x + 40) + 'px';
